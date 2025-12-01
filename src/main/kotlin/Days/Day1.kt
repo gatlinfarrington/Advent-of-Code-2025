@@ -28,9 +28,8 @@ class Day1 : Day() {
         var password2 = 0
 
         for (line in input.split("\n")) {
-            val instr = line.trim()
-            val dir = instr.first()
-            val dist = instr.substring(1).toInt()
+            val dir = line.first()
+            val dist = line.substring(1).toInt()
 
             val (newIndex, newPassword) =
                 if (dir == 'R') {
