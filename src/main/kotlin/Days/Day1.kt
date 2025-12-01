@@ -46,38 +46,21 @@ class Day1 : Day() {
         println(password2)
     }
 
-    fun normalizeNum(num: Int): Int{
-        if(num > 99){
-            return num%100
-        }else if(num < 0){
-            return num%-100
-        }else{
-            return num
-        }
-    }
-
-    fun wrap(x: Int): Int =
+    fun normalizeNum(x: Int): Int =
         ((x % 100) + 100) % 100
 
     fun stepRight(start: Int, distance: Int, currentPassword: Int): Pair<Int, Int> {
         val hits = (start + distance) / 100
-        val newIndex = wrap(start + distance)
+        val newIndex = normalizeNum(start + distance)
         return Pair(newIndex, currentPassword + hits)
     }
 
     fun stepLeft(start: Int, distance: Int, currentPassword: Int): Pair<Int, Int> {
         val s = start
         val d = distance
-
         val firstK = if (s == 0) 100 else s
-        val hits =
-            if (d < firstK) {
-                0
-            } else {
-                1 + (d - firstK) / 100
-            }
-
-        val newIndex = wrap(s - d)
+        val hits = if (d < firstK) { 0 } else { 1 + (d - firstK) / 100 }
+        val newIndex = normalizeNum(s - d)
         return Pair(newIndex, currentPassword + hits)
     }
 }
